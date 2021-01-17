@@ -1,5 +1,5 @@
 <?php
-require('../config/database.php');
+require('../config/db-login.php');
 include("auth.php");
 ?>
 <!DOCTYPE html>

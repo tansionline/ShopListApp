@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php
-require('../config/database.php');
+require('../config/db-login.php');
 // If form submitted, insert values into the database.
 if (isset($_REQUEST['username'])){
         // removes backslashes
@@ -19,15 +19,18 @@ if (isset($_REQUEST['username'])){
  $password = stripslashes($_REQUEST['password']);
  $password = mysqli_real_escape_string($con,$password);
  $trn_date = date("Y-m-d H:i:s");
-        $query = "INSERT into `second` (username, password, email, trn_date)
+
+$query = "INSERT into `allData` (username, password, email, trn_date)
 VALUES ('$username', '".md5($password)."', '$email', '$trn_date')";
-        $result = mysqli_query($con,$query);
-        if($result){
-            echo "<div class='form'>
+
+$result = mysqli_query($con,$query);
+
+if ($result) {
+echo "<div class='form'>
 <h3>You are registered successfully.</h3>
-<br/>Click here to <a href='login.php'>Login</a></div>";
-        }
-    }else{
+<br/>Click here to <a href='./login.php'>Login</a></div>";
+}
+    } else {
 ?>
 <div class="form">
 <h1>Registration</h1>

@@ -1,16 +1,16 @@
 <?php
-// used to connect to the database
+
 $host = "localhost";
-$db_name = "ShopListApp";
+$db_name = "Users";
 $username = "root";
-$password = "password";
+$password = "loveU2020.a";
   
 try {
     $con = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
 }
   
-// show error
-catch(PDOException $exception){
+catch(PDOException $exception) {
     echo "Connection error: " . $exception->getMessage();
 }
+
 ?>

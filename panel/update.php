@@ -18,7 +18,7 @@
             include '../config/database.php';
  
             try {
-                $query = "SELECT id, name, description, FROM allData WHERE id = ? LIMIT 0,1";
+                $query = "SELECT id, name, description, FROM basket WHERE id = ? LIMIT 0,1";
                 $stmt = $con->prepare( $query );
                 
                 $stmt->bindParam(1, $id);

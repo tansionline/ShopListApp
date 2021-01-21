@@ -6,7 +6,7 @@ try {
      
     $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
  
-    $query = "DELETE FROM allData WHERE id = ?";
+    $query = "DELETE FROM basket WHERE id = ?";
     $stmt = $con->prepare($query);
     $stmt->bindParam(1, $id);
      

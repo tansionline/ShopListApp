@@ -3,7 +3,7 @@
 <head>
     <title>Your Basket</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />     
-    <!-- custom css -->
+
     <style>
     .m-r-1em{ margin-right:1em; }
     .m-b-1em{ margin-bottom:1em; }
@@ -23,15 +23,18 @@
         </div>
      
         <?php
+            session_start();
+            echo $_SESSION['userid'];
+
             include '../config/database.php';
-            
+  
             $action = isset($_GET['action']) ? $_GET['action'] : "";
  
             if($action=='deleted'){
                 echo "<div class='alert alert-success'>Deleted.</div>";
             }
-            // select all data
-            $query = "SELECT id, name, description FROM allData ORDER BY id DESC";
+
+            $query = "SELECT user_id, name, description FROM basket ORDER BY id DESC";
             $stmt = $con->prepare($query);
             $stmt->execute();
             

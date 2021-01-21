@@ -15,25 +15,25 @@
         </div>
       
     <?php
-        if($_POST){
+        session_start();
+        echo $user_id;
+        if($_POST) {
  
         include '../config/database.php';
  
         try{
      
-        $query = "INSERT INTO allData SET name=:name, description=:description, created=:created";
+        $query = "INSERT INTO basket SET name=:name, description=:description";
  
         $stmt = $con->prepare($query);
- 
-        $name=htmlspecialchars(strip_tags($_POST['name']));
-        $description=htmlspecialchars(strip_tags($_POST['description']));
- 
+        
+        $name = htmlspecialchars(strip_tags($_POST['name']));
+        $description = htmlspecialchars(strip_tags($_POST['description']));
+        
+
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
-         
-        $created=date('Y-m-d H:i:s');
-        $stmt->bindParam(':created', $created);
-         
+
         if ($stmt->execute()) {
             echo "<div class='alert alert-success'>Item added your basket.</div>";
         }

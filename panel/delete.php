@@ -1,5 +1,7 @@
 <?php
 
+include "../../../../components/navbar.php";
+
 include '../config/database.php';
  
 try {

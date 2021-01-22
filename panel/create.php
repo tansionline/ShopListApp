@@ -15,6 +15,7 @@
         </div>
       
     <?php
+        include "../../../../components/navbar.php";
         session_start();
         echo $user_id;
         if($_POST) {

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
        <head>
-              <meta charset="utf-8">
-              <title>Login</title>
-              <link rel="stylesheet" href="css/style.css" />
+       <meta charset="utf-8">
+       <title>Login</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
        </head>
 <body>
 
 <?php
+       
+       include "../../../../components/navbar.php";
        require('../config/db-login.php');
        session_start();
 
@@ -21,21 +23,13 @@
        
        $query = "SELECT * FROM `register` WHERE username='$username'
        and password='".md5($password)."'";
-
-       $query_id = "SELECT id FROM register WHERE username='$username'";
-       
+      
        $result = mysqli_query($con, $query) or die(mysql_error());
-
        $check = mysqli_fetch_array($result);
        
-       $id = mysqli_query($con, $query_id) or die(mysql_error());
-       $ids = mysqli_fetch_object($id);
-
        if (isset($check)) {    
-
        $_SESSION['username'] = $username;
-       $_SESSION['userid'] = $ids;
-
+       
        header("Location: ../panel/index.php");
 
 }
@@ -45,7 +39,7 @@
        echo "<div class='form'>
        <h3>Username/password is incorrect.</h3>
        <br/>Click here to <a href='login.php'>Login</a></div>";
- }
+       }
     }
 
     else {
@@ -53,7 +47,7 @@
        <div class="form">
        <h1>Log In</h1>
 
-       <form action="" method="post" name="login">
+       <form action="" method="POST" name="login">
               <input type="text" name="username" placeholder="Username" required />
               <input type="password" name="password" placeholder="Password" required />
               <input name="submit" type="submit" value="Login" />

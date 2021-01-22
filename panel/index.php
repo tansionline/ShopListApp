@@ -1,3 +1,6 @@
+<?php
+    include '../../../../components/navbar.html';
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -16,37 +19,49 @@
  
      <div class="container"> 
         <div class="page-header">
-            <h1>Welcome Your Basket</h1>
-            <a class="btn btn-giant btn-primary" href="../login/logout.php">
-                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout
+                <?php
+                    include '../../../../components/navbar.html';
+                    include '../config/database.php';
+                    session_start(); 
+                    $username = $_SESSION['username'];
+
+                    if ($_SESSION['username'] == '') {
+                        echo "<h1>All Basket </h1>";
+                    } 
+                    else {
+                    echo "<h1>Welcome Your Basket, $username </h1>";
+                    echo "
+                    <a class='btn btn-giant btn-primary' href='../login/logout.php'>
+                    <span class='glyphicon glyphicon-log-out' aria-hidden='true'></span> Logout
+                    ";
+
+                    }
+                ?>
             </a>
         </div>
-     
-        <?php
-            session_start();
-            echo $_SESSION['userid'];
 
-            include '../config/database.php';
-  
+        <?php  
             $action = isset($_GET['action']) ? $_GET['action'] : "";
  
-            if($action=='deleted'){
+            if($action=='deleted') {
                 echo "<div class='alert alert-success'>Deleted.</div>";
             }
 
-            $query = "SELECT user_id, name, description FROM basket ORDER BY id DESC";
+            $query = "SELECT id, name, description FROM basket ORDER BY id DESC";
             $stmt = $con->prepare($query);
             $stmt->execute();
             
             $num = $stmt->rowCount();
 
-            
-            echo " <a class='btn btn-giant btn-primary' href='create.php'>
+            if ($_SESSION['username'] == true) {
+            echo " 
+            <a class='btn btn-giant btn-primary' href='create.php'>
                 <span class='glyphicon glyphicon-plus' aria-hidden='true'></span> 
                 Add Item
             </a>";
-
-            if($num>0){
+            }
+            
+            if($num > 0) {
 
                 echo "<table class='table table-hover table-responsive table-bordered'>";
  
@@ -54,6 +69,7 @@
                     echo "<th>Name</th>";
                     echo "<th>Description</th>";
                     echo "<th>Action</th>";
+                    echo "<th>User Name</th>";
                 echo "</tr>";
                 
             // fetch() is faster than fetchAll()
@@ -66,12 +82,17 @@
                     echo "<td>{$name}</td>";
                     echo "<td>{$description}</td>";
                     echo "<td>";
-                        
+                    
+                    if ($_SESSION['username'] == true) {
                         echo "<a href='update.php?id={$id}' class='btn btn-primary m-r-1em'>Edit</a>";
             
                         echo "<a href='#' onclick='delete_user({$id});'  class='btn btn-danger'>Delete</a>";
-
+                    }
+                    else {
+                        echo "<a href='../login/login.php';'  class='btn btn-danger'>Login</a>";
+                    }
                     echo "</td>";
+                    ///echo "<td>{$username}</td>";
                 echo "</tr>";
             }
                 echo "</table>";
@@ -92,7 +113,7 @@
 function delete_user( id ){
      
     var answer = confirm('Are you sure?');
-    if (answer){
+    if (answer) {
         window.location = 'delete.php?id=' + id;
     } 
 }

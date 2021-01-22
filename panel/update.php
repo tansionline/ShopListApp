@@ -13,6 +13,8 @@
         </div>
      
         <?php
+            include "../../components/navbar.php";
+
             $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR: Basket ID not found.');
  
             include '../config/database.php';
@@ -51,15 +53,16 @@
  
             if($_POST){
       
-                try{
-                    $query = "UPDATE allData 
+                try {
+
+                    $query = "UPDATE basket 
                     SET name=:name, description=:description 
                     WHERE id = :id";
   
                     $stmt = $con->prepare($query);
   
-                    $name=htmlspecialchars(strip_tags($_POST['name']));
-                    $description=htmlspecialchars(strip_tags($_POST['description']));
+                    $name = htmlspecialchars(strip_tags($_POST['name']));
+                    $description = htmlspecialchars(strip_tags($_POST['description']));
             
                     $stmt->bindParam(':name', $name);
                     $stmt->bindParam(':description', $description);

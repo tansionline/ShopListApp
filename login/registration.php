@@ -10,7 +10,7 @@
        <?php
        include "../../../../components/navbar.php";
 
-       require('../config/db-login.php');
+       require('../config/database.php');
 
        if (isset($_REQUEST['username'])){
 
@@ -36,18 +36,25 @@
 }
        else {
 ?>
-
-<div class="form">
+<div class="mb-2 primary">
+<div class="form-group">
        <h1>Registration</h1>
               
-       <form name="registration" method="POST">
-              <input type="text" name="username" placeholder="Username" required />
-              <input type="email" name="email" placeholder="Email" required />
-              <input type="password" name="password" placeholder="Password" required />
-              <input type="submit" name="submit" value="Register" />
+       <form class="form-control" name="registration" method="POST">
+              <label for="username">Username:</label>
+              <input class="form-control" type="text" name="username" placeholder="Username" required />
+
+              <label for="email">Email:</label>
+              <input class="form-control" type="email" name="email" placeholder="Email" required />
+              
+              <label for="password">Password: </label>
+              <input class="form-control" type="password" name="password" placeholder="Password" required />
+              
+              <br>
+              <input class="btn btn-primary" type="submit" name="submit" value="Register" />
        </form>
 </div>
-
+</div>
 <?php } ?>
 </body>
 

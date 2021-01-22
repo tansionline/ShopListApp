@@ -44,13 +44,18 @@
 
     else {
 ?>
-       <div class="form">
+       <div class="form-group">
        <h1>Log In</h1>
 
-       <form action="" method="POST" name="login">
-              <input type="text" name="username" placeholder="Username" required />
-              <input type="password" name="password" placeholder="Password" required />
-              <input name="submit" type="submit" value="Login" />
+       <form class="form-control" method="POST" name="login">
+              <label for="username">Username:</label>
+              <input class="form-control" type="text" name="username" placeholder="Username" required />
+             
+              <label for="password">Password:</label>
+              <input class="form-control" type="password" name="password" placeholder="Password" required />
+             
+              <br>
+              <input name="submit" type="submit" value="Login" class="btn btn-primary" />
        </form>
        <p>Not registered yet? <a href='registration.php'>Register Here</a></p>
 </div>

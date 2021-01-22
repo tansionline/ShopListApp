@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost","root","loveU2020.a","Users");
+$con = mysqli_connect("localhost","root","","Users");
 
 if (mysqli_connect_errno())
 

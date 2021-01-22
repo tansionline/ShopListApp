@@ -1,5 +1,5 @@
 <?php 
-    include "components/navbar.php";
+    include "../../../../components/navbar.php";
     
 ?>
 
